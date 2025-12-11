@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gấu Con Thông Minh</title>
+    <title>Gấu Con Đáng Yêu Nhất</title>
     <style>
-        /* --- CẤU HÌNH MÀU SẮC --- */
+        /* --- 1. CẤU HÌNH MÀU SẮC PASTEL --- */
         :root {
-            --bg-color: #fff0f5;
-            --primary-color: #ffb7b2;
-            --text-color: #880e4f;
-            --bear-color: #e6cbb1; /* Màu lông nhạt hơn chút */
-            --bear-dark: #d6b492;
-            --blush: #ff80ab;
+            --bg-color: #fdf2f8; 
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --primary-color: #fbcfe8; 
+            --text-color: #831843;
+            --bear-color: #eaddcf;
+            --bear-dark: #d4c5b0;
+            --blush: #fda4af;
         }
 
         body {
@@ -23,48 +24,48 @@
             align-items: center;
             height: 100vh;
             background-color: var(--bg-color);
-            background-image: radial-gradient(#ffe4e1 15%, transparent 16%), radial-gradient(#ffe4e1 15%, transparent 16%);
-            background-size: 60px 60px;
-            background-position: 0 0, 30px 30px;
-            font-family: 'Quicksand', sans-serif; /* Font chữ tròn trịa */
+            background-image: radial-gradient(#fce7f3 15%, transparent 16%), radial-gradient(#fce7f3 15%, transparent 16%);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+            font-family: 'Segoe UI', sans-serif;
             overflow: hidden;
             flex-direction: column;
         }
 
-        /* --- CARD --- */
+        /* --- 2. KHUNG THẺ BÀI --- */
         .card {
-            background: rgba(255, 255, 255, 0.9);
+            background: var(--card-bg);
             padding: 40px;
-            border-radius: 40px;
-            box-shadow: 0 15px 35px rgba(255, 183, 178, 0.5);
+            border-radius: 35px;
+            box-shadow: 0 10px 30px rgba(251, 207, 232, 0.8);
             text-align: center;
             position: relative;
             z-index: 10;
             width: 320px;
-            border: 4px solid #fff;
+            max-width: 90%;
+            border: 5px solid #fff;
             transition: transform 0.3s;
         }
 
-        /* --- GẤU RUNG RINH KHI VUI --- */
-        @keyframes happy-shake {
-            0% { transform: rotate(0deg); }
-            25% { transform: rotate(5deg); }
-            50% { transform: rotate(0deg); }
-            75% { transform: rotate(-5deg); }
-            100% { transform: rotate(0deg); }
-        }
+        .card:hover { transform: translateY(-5px); }
 
-        .shake-active {
-            animation: happy-shake 0.5s ease infinite;
-        }
-
-        /* --- VẼ GẤU --- */
+        /* --- 3. VẼ GẤU & ANIMATION --- */
         .bear-container {
             position: relative;
             width: 140px;
             height: 120px;
-            margin: 0 auto 10px;
+            margin: 0 auto 15px;
         }
+
+        /* Animation lắc lư khi vui */
+        @keyframes happy-shake {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(8deg); }
+            50% { transform: rotate(0deg); }
+            75% { transform: rotate(-8deg); }
+            100% { transform: rotate(0deg); }
+        }
+        .shake-active { animation: happy-shake 0.6s ease infinite; }
 
         .bear-head {
             width: 120px;
@@ -74,7 +75,6 @@
             position: absolute;
             left: 10px;
             z-index: 2;
-            box-shadow: inset -5px -5px 10px rgba(0,0,0,0.05);
         }
 
         .ear {
@@ -85,12 +85,11 @@
             position: absolute;
             top: 5px;
             z-index: 1;
-            transition: transform 0.2s;
         }
         .ear.left { left: 0; }
         .ear.right { right: 0; }
 
-        /* Mắt có tròng đen di chuyển */
+        /* Cấu trúc mắt để liếc */
         .eye-socket {
             width: 28px;
             height: 28px;
@@ -98,32 +97,25 @@
             border-radius: 50%;
             position: absolute;
             top: 35px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             z-index: 3;
+            overflow: hidden; /* Giữ tròng đen không lòi ra ngoài */
         }
         .eye-socket.left { left: 25px; }
         .eye-socket.right { right: 25px; }
 
         .pupil {
-            width: 12px;
-            height: 12px;
+            width: 14px;
+            height: 14px;
             background-color: #3e2723;
             border-radius: 50%;
-            position: relative;
-            transition: transform 0.1s; /* Mượt mà khi liếc */
-        }
-        /* Đốm sáng trong mắt */
-        .pupil::after {
-            content: '';
-            width: 4px;
-            height: 4px;
-            background: white;
-            border-radius: 50%;
             position: absolute;
-            top: 2px;
-            right: 2px;
+            top: 7px; 
+            left: 7px;
+            transition: transform 0.1s; /* Liếc mượt mà */
+        }
+        .pupil::after { /* Đốm sáng trong mắt */
+            content: ''; width: 4px; height: 4px; background: #fff;
+            border-radius: 50%; position: absolute; top: 3px; right: 3px;
         }
 
         .nose-area {
@@ -132,94 +124,57 @@
             background-color: #fff;
             border-radius: 20px;
             position: absolute;
-            top: 65px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 3;
+            top: 65px; left: 50%; transform: translateX(-50%); z-index: 3;
         }
-
         .nose {
-            width: 16px;
-            height: 12px;
-            background-color: #4e342e;
-            border-radius: 50%;
-            position: absolute;
-            top: 5px;
-            left: 50%;
-            transform: translateX(-50%);
+            width: 16px; height: 10px; background: #5d4037;
+            border-radius: 50%; position: absolute; top: 6px; left: 50%; transform: translateX(-50%);
         }
-
         .mouth {
-            width: 20px;
-            height: 10px;
-            border-bottom: 3px solid #4e342e;
-            border-radius: 50%;
-            position: absolute;
-            top: 15px;
-            left: 50%;
-            transform: translateX(-50%);
+            width: 20px; height: 10px; border-bottom: 3px solid #5d4037;
+            border-radius: 50%; position: absolute; top: 16px; left: 50%; transform: translateX(-50%);
         }
-
         .blush {
-            width: 25px;
-            height: 15px;
-            background-color: var(--blush);
-            border-radius: 50%;
-            position: absolute;
-            top: 60px;
-            z-index: 3;
-            opacity: 0.5;
+            width: 24px; height: 14px; background: var(--blush); opacity: 0.6;
+            border-radius: 50%; position: absolute; top: 65px; z-index: 3;
         }
-        .blush.left { left: 10px; }
-        .blush.right { right: 10px; }
+        .blush.left { left: 12px; }
+        .blush.right { right: 12px; }
 
-        /* --- TEXT & BUTTON --- */
-        h1 {
-            color: var(--text-color);
-            margin: 10px 0;
-            font-size: 22px;
-        }
-
-        p {
-            color: #795548;
-            font-size: 15px;
-            min-height: 50px; /* Giữ chỗ để text không bị nhảy */
-        }
+        /* --- 4. TEXT & NÚT BẤM --- */
+        h1 { color: var(--text-color); margin: 10px 0; font-size: 22px; }
+        p { color: #888; font-size: 15px; margin-bottom: 25px; min-height: 45px; line-height: 1.4; }
 
         .btn {
-            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+            background: linear-gradient(135deg, #fbcfe8, #f472b6);
+            color: #fff;
             border: none;
             padding: 12px 35px;
             border-radius: 50px;
-            color: white;
-            font-weight: bold;
             font-size: 16px;
+            font-weight: bold;
             cursor: pointer;
-            box-shadow: 0 5px 15px rgba(255, 128, 171, 0.4);
-            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 5px 15px rgba(244, 114, 182, 0.4);
+            transition: all 0.3s;
         }
+        .btn:hover { transform: scale(1.05); box-shadow: 0 8px 20px rgba(244, 114, 182, 0.6); }
+        .btn:active { transform: scale(0.95); }
 
-        .btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 20px rgba(255, 128, 171, 0.6);
-        }
-
-        .btn:active {
-            transform: scale(0.95);
-        }
-
-        /* --- HIỆU ỨNG BAY LÊN --- */
-        .emoji-float {
+        /* --- 5. HIỆU ỨNG MƯA TIM/EMOJI --- */
+        .falling-item {
             position: absolute;
             font-size: 24px;
-            animation: float 3s ease-in forwards;
+            user-select: none;
             pointer-events: none;
+            animation: floatUp 4s linear forwards;
+            bottom: -50px;
             z-index: 100;
         }
 
-        @keyframes float {
-            0% { transform: translateY(0) scale(0.5); opacity: 1; }
-            100% { transform: translateY(-120vh) scale(1.5) rotate(360deg); opacity: 0; }
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(0.5) rotate(0deg); opacity: 1; }
+            50% { opacity: 0.9; transform: translateX(20px) scale(1.1) rotate(180deg); }
+            100% { transform: translateY(-120vh) translateX(-20px) scale(1.5) rotate(360deg); opacity: 0; }
         }
     </style>
 </head>
@@ -230,12 +185,8 @@
             <div class="ear left"></div>
             <div class="ear right"></div>
             <div class="bear-head">
-                <div class="eye-socket left">
-                    <div class="pupil"></div>
-                </div>
-                <div class="eye-socket right">
-                    <div class="pupil"></div>
-                </div>
+                <div class="eye-socket left"><div class="pupil"></div></div>
+                <div class="eye-socket right"><div class="pupil"></div></div>
                 <div class="blush left"></div>
                 <div class="blush right"></div>
                 <div class="nose-area">
@@ -245,87 +196,83 @@
             </div>
         </div>
 
-        <h1 id="title">Hi, tớ là Gấu! 🐻</h1>
-        <p id="message">Di chuột qua mắt tớ xem thử đi!<br>Sau đó bấm nút bên dưới nhé.</p>
-        <button class="btn" onclick="surprise()">Chọt vào đây nè!</button>
+        <h1 id="title">Hé lô đằng ấy! 👋</h1>
+        <p id="message">Tớ có một bí mật nhỏ xíu...<br>Cậu muốn nghe hông?</p>
+        <button class="btn" onclick="showLove()">Bấm vào đây đi!</button>
     </div>
 
     <script>
-        // --- TÍNH NĂNG 1: MẮT LIẾC THEO CHUỘT ---
+        // --- 1. LOGIC MẮT LIẾC THEO CHUỘT ---
         document.addEventListener('mousemove', (e) => {
             const pupils = document.querySelectorAll('.pupil');
-            
             pupils.forEach(pupil => {
-                // Lấy vị trí tâm của mắt
                 const rect = pupil.getBoundingClientRect();
                 const x = rect.left + rect.width / 2;
                 const y = rect.top + rect.height / 2;
-
-                // Tính góc giữa chuột và mắt
                 const radian = Math.atan2(e.pageX - x, e.pageY - y);
-                const rot = (radian * (180 / Math.PI) * -1) + 270;
-
-                // Giới hạn độ liếc để tròng đen không ra khỏi mắt trắng
-                // Di chuyển pupil một chút theo hướng chuột
-                const moveDistance = 5; 
-                const moveX = Math.sin(radian) * moveDistance;
-                const moveY = Math.cos(radian) * moveDistance;
-
+                const moveX = Math.sin(radian) * 6; // Độ liếc ngang
+                const moveY = Math.cos(radian) * 6; // Độ liếc dọc
                 pupil.style.transform = `translate(${moveX}px, ${moveY}px)`;
             });
         });
 
-        // --- DANH SÁCH LỜI NHẮN NGẪU NHIÊN ---
+        // --- 2. LOGIC TƯƠNG TÁC KHI BẤM NÚT ---
         const messages = [
-            "Cậu cute xỉu lun á! 💖",
-            "Hôm nay cậu vất vả rồi, nghỉ ngơi xíu đi!",
-            "Cậu là phi hành gia hả? Vì cậu có cả vũ trụ trong mắt ✨",
-            "Bấm nữa là tớ thích cậu đấy nha! 😠❤️",
-            "Trời đổ mưa rồi, sao cậu chưa đổ tớ? ☔",
-            "10 điểm cho nụ cười của cậu! 💯",
-            "Đừng buồn nha, Gấu ở đây với cậu nè! 🧸"
+            "Cậu là điều tuyệt vời nhất hôm nay! ❤️",
+            "Mỗi ngày đều vui vẻ nhé, tớ luôn ủng hộ cậu! 🌟",
+            "Thả tim cho nụ cười của cậu nè! 💖",
+            "Cậu cute xỉu luôn á trời ơi! 🧸",
+            "Đừng quên uống nước đầy đủ nha! 🥤",
+            "Tớ thích cậu... à nhầm, thích nụ cười cậu! 🤭"
         ];
+        
+        const icons = ['❤️', '🧡', '💛', '💚', '💙', '💜', '💖', '🌸', '✨', '🧸', '🍓'];
 
-        const icons = ['❤️', '💖', '🌟', '🦄', '🍭', '🍓', '🧸', '✨'];
-
-        // --- TÍNH NĂNG 2 & 3: XỬ LÝ KHI BẤM NÚT ---
-        function surprise() {
+        function showLove() {
             const title = document.getElementById('title');
             const msg = document.getElementById('message');
-            const bearContainer = document.getElementById('bear');
+            const bear = document.getElementById('bear');
+            const btn = document.querySelector('.btn');
 
-            // 1. Random lời nhắn
-            const randomMsg = messages[Math.floor(Math.random() * messages.length)];
-            
-            title.innerText = "Yayy!! 🥰";
-            msg.innerText = randomMsg;
+            // Đổi nội dung
+            title.innerText = "Yêu cậu nhiều! 🥰";
+            msg.innerText = messages[Math.floor(Math.random() * messages.length)];
+            btn.innerText = "Hihi đồ ngốc ❤️";
 
-            // 2. Gấu lắc lư (Thêm class rồi xóa đi sau 1s để có thể lắc lại)
-            bearContainer.classList.add('shake-active');
-            setTimeout(() => {
-                bearContainer.classList.remove('shake-active');
-            }, 1000);
+            // Hiệu ứng lắc lư gấu
+            bear.classList.add('shake-active');
+            setTimeout(() => bear.classList.remove('shake-active'), 1000);
 
-            // 3. Mưa icon
-            for (let i = 0; i < 20; i++) {
-                setTimeout(createFloatingIcon, i * 100);
-            }
+            // Tạo mưa tim/emoji
+            let count = 0;
+            const interval = setInterval(() => {
+                createFallingItem();
+                count++;
+                if (count > 30) clearInterval(interval); // Mưa 30 cái rồi dừng cho đỡ lag
+            }, 100);
         }
 
-        function createFloatingIcon() {
-            const icon = document.createElement('div');
-            icon.classList.add('emoji-float');
-            icon.innerText = icons[Math.floor(Math.random() * icons.length)];
+        function createFallingItem() {
+            const item = document.createElement('div');
+            item.classList.add('falling-item');
             
-            // Random vị trí xuất phát ngẫu nhiên quanh nút
-            icon.style.left = Math.random() * 100 + "vw";
-            icon.style.top = "100vh";
+            // Random icon từ danh sách
+            item.innerText = icons[Math.floor(Math.random() * icons.length)];
+            
+            // Random vị trí ngang (trái/phải)
+            item.style.left = Math.random() * 95 + "vw";
+            
+            // Random kích thước to nhỏ khác nhau
+            const size = Math.random() * 20 + 15; // 15px - 35px
+            item.style.fontSize = size + "px";
 
-            document.body.appendChild(icon);
+            // Random tốc độ bay
+            item.style.animationDuration = (Math.random() * 2 + 3) + "s"; // 3s - 5s
 
-            setTimeout(() => {
-                icon.remove();
-            }, 3000);
+            document.body.appendChild(item);
+
+            // Xóa đi sau khi bay xong
+            setTimeout(() => { item.remove(); }, 5000);
         }
     </script>
 </body>
