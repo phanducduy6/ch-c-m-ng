@@ -126,7 +126,7 @@
     </div>
 
     <script>
-        // --- CẤU HÌNH ĐÃ CẬP NHẬT ẢNH CỦA BẠN ---
+        // --- CẤU HÌNH ĐÃ CẬP NHẬT 2 ẢNH MỚI ---
         const BANKS = {
             "VCB": {
                 type: "BANK",
@@ -140,19 +140,19 @@
             "ZALO": {
                 type: "WALLET",
                 name: "Ví ZaloPay",
-                acc: "0347856690", // Số điện thoại lấy từ trong ảnh Zalo của bạn
+                acc: "0347856690", 
                 user: "PHAN DUC DUY",
-                // Link ảnh Zalo trực tiếp bạn vừa gửi
-                logo: "https://i.ibb.co/67JF2DYZ/IMG-0470.png", 
+                // Link ảnh Zalo MỚI
+                logo: "https://i.ibb.co/W4tkqgXT/IMG-0473.jpg", 
                 appLink: "zalopay://"
             },
             "MOMO": {
                 type: "WALLET",
                 name: "Ví MoMo",
-                acc: "0347856690", // Số điện thoại lấy từ trong ảnh MoMo của bạn
+                acc: "0347856690",
                 user: "PHAN DUC DUY",
-                // Link ảnh MoMo trực tiếp bạn vừa gửi
-                logo: "https://i.ibb.co/1GTKv9Tz/IMG-0469.jpg",
+                // Link ảnh MoMo MỚI
+                logo: "https://i.ibb.co/ZjWfQf7/IMG-0472.jpg",
                 appLink: "momo://"
             }
         };
@@ -178,10 +178,9 @@
             // 3. Xử lý ảnh QR
             const amountInput = document.getElementById("amount");
             if (data.type === "WALLET") {
-                // Nếu là Zalo/MoMo -> Hiện ảnh tĩnh của bạn
+                // Nếu là Zalo/MoMo -> Hiện ảnh tĩnh mới của bạn
                 document.getElementById("qr_img").src = data.logo;
                 document.getElementById("noteText").innerText = "✨ Quét mã trên để thanh toán nha!";
-                // Với ví điện tử, số tiền nhập vào chỉ để ghi nhớ, không đổi QR được
             } else {
                 // Nếu là VCB -> Chạy QR động
                 document.getElementById("noteText").innerText = "💖 Nhập số tiền để tạo QR cute!";
