@@ -3,126 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cổng Thanh Toán: VCB - Zalo - MoMo</title>
+    <title>Cổng Thanh Toán Cute Pink</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
+        /* --- GIAO DIỆN HỒNG PINK --- */
         body {
-            font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #e9ecef;
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #fff0f5 0%, #ffe6ee 100%);
+            /* Hiệu ứng nền đốm sáng */
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(255, 182, 193, 0.4) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(255, 105, 180, 0.3) 0%, transparent 50%);
+            background-attachment: fixed;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            padding: 10px;
+            padding: 15px;
+            color: #880e4f;
         }
+
         .card {
-            background: white;
-            padding: 20px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            padding: 25px;
+            border-radius: 30px;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 20px 50px rgba(255, 105, 180, 0.25);
             width: 100%;
             max-width: 400px;
             text-align: center;
+            animation: floatUp 0.8s ease-out;
         }
-        h2 { color: #333; margin: 0 0 15px 0; font-size: 22px; }
+        @keyframes floatUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* KHU VỰC CHỌN 3 CỔNG */
+        h2 { color: #d81b60; margin: 0 0 20px 0; font-weight: 800; text-shadow: 2px 2px 4px rgba(255, 182, 193, 0.5); }
+
+        /* TABS */
         .bank-tabs {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 20px;
-            background: #f8f9fa;
-            padding: 5px;
-            border-radius: 12px;
+            display: flex; gap: 8px; margin-bottom: 25px; background: #fff0f5; padding: 6px; border-radius: 20px;
         }
         .tab-btn {
-            flex: 1;
-            padding: 12px 5px;
-            border: none;
-            border-radius: 8px;
-            background: transparent;
-            color: #888;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.2s;
+            flex: 1; padding: 10px; border: none; border-radius: 15px; background: transparent;
+            color: #ec407a; font-weight: 700; font-family: 'Nunito', sans-serif; cursor: pointer; transition: 0.3s;
             font-size: 13px;
         }
-        .tab-btn:hover { background: #e9ecef; }
-        
-        /* Hiệu ứng khi chọn từng tab */
-        .tab-btn.active { background: white; box-shadow: 0 2px 5px rgba(0,0,0,0.08); color: #000; }
-        .tab-btn.active[data-bank="VCB"] { color: #00C220; border-bottom: 3px solid #00C220; }
-        .tab-btn.active[data-bank="ZALO"] { color: #0068FF; border-bottom: 3px solid #0068FF; }
-        .tab-btn.active[data-bank="MOMO"] { color: #A50064; border-bottom: 3px solid #A50064; }
+        .tab-btn.active {
+            background: white; color: #d81b60; box-shadow: 0 4px 10px rgba(255, 105, 180, 0.2); transform: scale(1.05);
+        }
 
-        /* Khung thông tin */
+        /* INFO BOX */
         .bank-info {
-            background: #fcfcfc;
-            border: 1px solid #eee;
-            padding: 15px;
-            border-radius: 16px;
-            margin-bottom: 20px;
-            text-align: left;
-            font-size: 14px;
-            transition: 0.3s;
+            background: #fff9fb; border: 2px dashed #ff80ab; padding: 15px; border-radius: 20px; margin-bottom: 20px; text-align: left; font-size: 15px;
         }
         .bank-row { display: flex; justify-content: space-between; margin-bottom: 8px; }
-        .bank-val { font-weight: bold; color: #333; }
+        .bank-label { color: #ad1457; font-weight: 600; }
+        .bank-val { font-weight: 800; color: #d81b60; }
 
+        /* INPUT */
         input {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid #e5e7eb;
-            border-radius: 12px;
-            font-size: 24px;
-            text-align: center;
-            font-weight: bold;
-            color: #333;
-            outline: none;
-            box-sizing: border-box;
-            background: #f9fafb;
-            margin-bottom: 15px;
+            width: 100%; padding: 16px; border: 3px solid #ffd1e1; border-radius: 18px; font-size: 26px;
+            text-align: center; font-weight: 800; color: #d81b60; outline: none; background: #fffbfd;
+            font-family: 'Nunito', sans-serif; transition: 0.3s; box-sizing: border-box;
         }
-        input:focus { background: white; border-color: #333; }
+        input:focus { border-color: #ff4081; background: white; box-shadow: 0 0 20px rgba(255, 64, 129, 0.3); transform: scale(1.02); }
 
+        /* QR IMAGE */
         #qr_img {
-            width: 100%;
-            border-radius: 12px;
-            border: 1px solid #eee;
-            margin-bottom: 15px;
-            display: block;
-            min-height: 250px;
-            object-fit: contain;
-            background: #fafafa;
+            width: 100%; border-radius: 20px; border: 3px solid #fff0f5; margin-bottom: 20px; display: block;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05); background: white; 
+            min-height: 250px; 
+            max-height: 350px;
+            object-fit: contain; /* Giữ ảnh không bị méo */
         }
 
+        /* BUTTONS */
+        .btn-group { display: flex; flex-direction: column; gap: 12px; }
         .btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            padding: 14px;
-            border: none;
-            border-radius: 10px;
-            font-weight: bold;
-            font-size: 15px;
-            cursor: pointer;
-            text-decoration: none;
-            margin-bottom: 10px;
-            box-sizing: border-box;
-            color: white;
-            transition: 0.2s;
+            display: flex; align-items: center; justify-content: center; width: 100%; padding: 16px; border: none;
+            border-radius: 18px; font-weight: 800; font-size: 16px; font-family: 'Nunito', sans-serif;
+            cursor: pointer; text-decoration: none; box-sizing: border-box; transition: 0.4s;
         }
-        .btn-open { background-color: #00C220; }
-        .btn-save { background-color: #4b5563; }
+        .btn:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 10px 20px rgba(255, 105, 180, 0.3); }
+        .btn-pink-primary { background: linear-gradient(45deg, #ff4081, #ff80ab); color: white; }
+        .btn-pink-secondary { background: white; color: #ff4081; border: 3px solid #ff4081; }
         
-        .note { font-size: 12px; color: #999; margin-top: 10px; font-style: italic; }
+        .note { font-size: 13px; color: #ec407a; margin-top: 15px; font-weight: 600; }
     </style>
 </head>
 <body>
 
     <div class="card">
-        <h2>Thanh Toán</h2>
+        <h2>✨ Cổng Thanh Toán ✨</h2>
         
         <div class="bank-tabs">
             <button class="tab-btn active" data-bank="VCB" onclick="switchBank('VCB')">Vietcombank</button>
@@ -130,10 +103,10 @@
             <button class="tab-btn" data-bank="MOMO" onclick="switchBank('MOMO')">MoMo</button>
         </div>
 
-        <div class="bank-info" id="bankInfoBox">
-            <div class="bank-row"><span>Kênh:</span> <span class="bank-val" id="lbl_bank">Vietcombank</span></div>
-            <div class="bank-row"><span>Người nhận:</span> <span class="bank-val" id="lbl_name">PHAN DUC DUY</span></div>
-            <div class="bank-row"><span>Số tài khoản:</span> <span class="bank-val" id="lbl_acc">1041249904</span></div>
+        <div class="bank-info">
+            <div class="bank-row"><span class="bank-label">Kênh:</span> <span class="bank-val" id="lbl_bank">Vietcombank</span></div>
+            <div class="bank-row"><span class="bank-label">Người nhận:</span> <span class="bank-val" id="lbl_name">PHAN DUC DUY</span></div>
+            <div class="bank-row"><span class="bank-label">Số tài khoản:</span> <span class="bank-val" id="lbl_acc" style="font-size: 1.1em;">1041249904</span></div>
         </div>
 
         <input type="tel" id="amount" placeholder="Nhập số tiền..." onkeyup="formatMoney(this)">
@@ -141,50 +114,45 @@
         <img id="qr_img" src="" alt="QR Code"/>
 
         <div class="btn-group">
-            <button class="btn btn-save" onclick="downloadQR()">
-                ⬇ Tải Ảnh QR
+            <button class="btn btn-pink-secondary" onclick="downloadQR()">
+                ⬇ Lưu Ảnh QR
             </button>
-            <a href="#" id="deepLinkBtn" class="btn btn-open">
+            <a href="#" id="deepLinkBtn" class="btn btn-pink-primary">
                 🚀 Mở App Thanh Toán
             </a>
         </div>
         
-        <p class="note" id="noteText">*Nhập số tiền để tạo mã QR tự động</p>
+        <p class="note" id="noteText">💖 Nhập số tiền để tạo QR cute!</p>
     </div>
 
     <script>
-        // --- CẤU HÌNH THÔNG TIN ---
+        // --- CẤU HÌNH ĐÃ CẬP NHẬT ẢNH CỦA BẠN ---
         const BANKS = {
             "VCB": {
-                type: "BANK", // Loại Ngân hàng (Dùng VietQR)
+                type: "BANK",
                 name: "Vietcombank",
                 acc: "1041249904",
                 user: "PHAN DUC DUY",
-                color: "#eefbf3",
-                border: "#00C220",
-                logo: "https://img.vietqr.io/image/VCB-1041249904-compact2.png", // Ảnh gốc
+                // Dùng QR Only (Đen trắng) cho đẹp
+                logo: "https://img.vietqr.io/image/VCB-1041249904-qr_only.png",
                 appLink: "vcbdigibank://qr"
             },
             "ZALO": {
-                type: "WALLET", // Loại Ví (Dùng ảnh tĩnh)
+                type: "WALLET",
                 name: "Ví ZaloPay",
-                acc: "09xxxxxxxxx", // <-- ĐIỀN SỐ ZALO CỦA BẠN
+                acc: "0347856690", // Số điện thoại lấy từ trong ảnh Zalo của bạn
                 user: "PHAN DUC DUY",
-                color: "#e6f2ff",
-                border: "#0068FF",
-                // Thay link ảnh QR Zalo của bạn vào dòng dưới:
-                logo: "https://upload.wikimedia.org/wikipedia/vi/7/77/ZaloPay_Logo.png", 
+                // Link ảnh Zalo trực tiếp bạn vừa gửi
+                logo: "https://i.ibb.co/67JF2DYZ/IMG-0470.png", 
                 appLink: "zalopay://"
             },
             "MOMO": {
-                type: "WALLET", // Loại Ví (Dùng ảnh tĩnh)
+                type: "WALLET",
                 name: "Ví MoMo",
-                acc: "09xxxxxxxxx", // <-- ĐIỀN SỐ MOMO CỦA BẠN
+                acc: "0347856690", // Số điện thoại lấy từ trong ảnh MoMo của bạn
                 user: "PHAN DUC DUY",
-                color: "#fceef5",
-                border: "#A50064",
-                // Thay link ảnh QR MoMo của bạn vào dòng dưới:
-                logo: "https://upload.wikimedia.org/wikipedia/vi/f/fe/MoMo_Logo.png",
+                // Link ảnh MoMo trực tiếp bạn vừa gửi
+                logo: "https://i.ibb.co/1GTKv9Tz/IMG-0469.jpg",
                 appLink: "momo://"
             }
         };
@@ -195,51 +163,41 @@
             currentBank = bankCode;
             const data = BANKS[bankCode];
 
-            // 1. Đổi màu Tab
+            // 1. Đổi Tab Active
             document.querySelectorAll('.tab-btn').forEach(btn => {
                 btn.classList.remove('active');
                 if(btn.dataset.bank === bankCode) btn.classList.add('active');
             });
 
-            // 2. Đổi thông tin hiển thị
+            // 2. Đổi thông tin chữ
             document.getElementById("lbl_bank").innerText = data.name;
             document.getElementById("lbl_name").innerText = data.user;
             document.getElementById("lbl_acc").innerText = data.acc;
+            document.getElementById("deepLinkBtn").href = data.appLink;
 
-            // 3. Đổi màu sắc giao diện
-            const infoBox = document.getElementById("bankInfoBox");
-            infoBox.style.backgroundColor = data.color;
-            infoBox.style.borderColor = data.border;
-            
-            const btnOpen = document.getElementById("deepLinkBtn");
-            btnOpen.style.backgroundColor = data.border;
-            btnOpen.href = data.appLink;
-
-            // 4. Xử lý QR
+            // 3. Xử lý ảnh QR
             const amountInput = document.getElementById("amount");
-            
             if (data.type === "WALLET") {
-                // Nếu là Ví -> Hiện ảnh tĩnh (logo hoặc QR cá nhân)
+                // Nếu là Zalo/MoMo -> Hiện ảnh tĩnh của bạn
                 document.getElementById("qr_img").src = data.logo;
-                document.getElementById("noteText").innerText = "*Lưu ý: Ví này chỉ hiện QR tĩnh (không tự đổi tiền)";
-                amountInput.disabled = false; // Vẫn cho nhập tiền để nhớ
+                document.getElementById("noteText").innerText = "✨ Quét mã trên để thanh toán nha!";
+                // Với ví điện tử, số tiền nhập vào chỉ để ghi nhớ, không đổi QR được
             } else {
-                // Nếu là Ngân hàng -> Chạy hàm tạo QR động
-                document.getElementById("noteText").innerText = "*Nhập số tiền để tạo mã QR tự động";
-                amountInput.disabled = false;
+                // Nếu là VCB -> Chạy QR động
+                document.getElementById("noteText").innerText = "💖 Nhập số tiền để tạo QR cute!";
                 const rawAmount = amountInput.value.replace(/\D/g, "");
                 updateQR(rawAmount);
             }
         }
 
-        // Khởi chạy
+        // Chạy lần đầu
         switchBank('VCB');
 
         function formatMoney(input) {
             let val = input.value.replace(/\D/g, "");
             input.value = val ? parseInt(val).toLocaleString('en-US') : "";
             
-            // Chỉ update QR nếu là Ngân hàng (VCB)
+            // Chỉ cập nhật lại QR nếu đang ở tab Ngân hàng (VCB)
             if (BANKS[currentBank].type === "BANK") {
                 updateQR(val);
             }
@@ -249,30 +207,38 @@
             const data = BANKS[currentBank];
             let url;
             if(amount > 0) {
-                url = `https://img.vietqr.io/image/VCB-${data.acc}-compact2.png?amount=${amount}&addInfo=THANH TOAN&accountName=${data.user}`;
+                // QR kèm số tiền
+                url = `https://img.vietqr.io/image/VCB-${data.acc}-qr_only.png?amount=${amount}&addInfo=THANH TOAN&accountName=${data.user}`;
             } else {
-                url = `https://img.vietqr.io/image/VCB-${data.acc}-compact2.png`;
+                // QR mặc định
+                url = `https://img.vietqr.io/image/VCB-${data.acc}-qr_only.png`;
             }
             document.getElementById("qr_img").src = url;
         }
 
         async function downloadQR() {
-            const btn = document.querySelector(".btn-save");
+            const btn = document.querySelector(".btn-pink-secondary");
             btn.innerText = "⏳ Đang tải...";
+            
+            // Lấy link ảnh hiện tại
+            const imgUrl = document.getElementById("qr_img").src;
+            
             try {
-                const img = document.getElementById("qr_img");
-                const blob = await (await fetch(img.src)).blob();
+                const response = await fetch(imgUrl);
+                const blob = await response.blob();
                 const a = document.createElement("a");
                 a.href = URL.createObjectURL(blob);
-                a.download = `QR_${currentBank}.png`;
+                a.download = `QR_${currentBank}_Cute.png`;
                 document.body.appendChild(a);
                 a.click();
                 document.body.removeChild(a);
                 btn.innerText = "✅ Đã lưu!";
             } catch (e) {
-                alert("Lỗi tải ảnh (Do chính sách bảo mật). Hãy chụp màn hình nhé!");
+                // Dự phòng nếu trình duyệt chặn tải ảnh từ link ngoài
+                alert("Bạn vui lòng nhấn giữ vào ảnh QR và chọn 'Lưu vào ảnh' nhé!");
+                btn.innerText = "Lỗi tải ảnh";
             }
-            setTimeout(() => btn.innerText = "⬇ Tải Ảnh QR", 2000);
+            setTimeout(() => btn.innerText = "⬇ Lưu Ảnh QR", 2000);
         }
     </script>
 </body>
