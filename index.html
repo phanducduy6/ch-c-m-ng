@@ -10,7 +10,6 @@
         body {
             font-family: 'Nunito', sans-serif;
             background: linear-gradient(135deg, #fff0f5 0%, #ffe6ee 100%);
-            /* Hiệu ứng nền đốm sáng */
             background-image: 
                 radial-gradient(circle at 20% 30%, rgba(255, 182, 193, 0.4) 0%, transparent 50%),
                 radial-gradient(circle at 80% 70%, rgba(255, 105, 180, 0.3) 0%, transparent 50%);
@@ -40,7 +39,6 @@
 
         h2 { color: #d81b60; margin: 0 0 20px 0; font-weight: 800; text-shadow: 2px 2px 4px rgba(255, 182, 193, 0.5); }
 
-        /* TABS */
         .bank-tabs {
             display: flex; gap: 8px; margin-bottom: 25px; background: #fff0f5; padding: 6px; border-radius: 20px;
         }
@@ -53,7 +51,6 @@
             background: white; color: #d81b60; box-shadow: 0 4px 10px rgba(255, 105, 180, 0.2); transform: scale(1.05);
         }
 
-        /* INFO BOX */
         .bank-info {
             background: #fff9fb; border: 2px dashed #ff80ab; padding: 15px; border-radius: 20px; margin-bottom: 20px; text-align: left; font-size: 15px;
         }
@@ -61,7 +58,6 @@
         .bank-label { color: #ad1457; font-weight: 600; }
         .bank-val { font-weight: 800; color: #d81b60; }
 
-        /* INPUT */
         input {
             width: 100%; padding: 16px; border: 3px solid #ffd1e1; border-radius: 18px; font-size: 26px;
             text-align: center; font-weight: 800; color: #d81b60; outline: none; background: #fffbfd;
@@ -69,16 +65,14 @@
         }
         input:focus { border-color: #ff4081; background: white; box-shadow: 0 0 20px rgba(255, 64, 129, 0.3); transform: scale(1.02); }
 
-        /* QR IMAGE */
         #qr_img {
             width: 100%; border-radius: 20px; border: 3px solid #fff0f5; margin-bottom: 20px; display: block;
             box-shadow: 0 10px 20px rgba(0,0,0,0.05); background: white; 
             min-height: 250px; 
-            max-height: 350px;
-            object-fit: contain; /* Giữ ảnh không bị méo */
+            max-height: 400px; /* Tăng chiều cao để vừa ảnh dọc */
+            object-fit: contain;
         }
 
-        /* BUTTONS */
         .btn-group { display: flex; flex-direction: column; gap: 12px; }
         .btn {
             display: flex; align-items: center; justify-content: center; width: 100%; padding: 16px; border: none;
@@ -126,14 +120,13 @@
     </div>
 
     <script>
-        // --- CẤU HÌNH ĐÃ CẬP NHẬT 2 ẢNH MỚI ---
+        // --- CẤU HÌNH ĐÃ CẬP NHẬT 2 ẢNH MỚI NHẤT ---
         const BANKS = {
             "VCB": {
                 type: "BANK",
                 name: "Vietcombank",
                 acc: "1041249904",
                 user: "PHAN DUC DUY",
-                // Dùng QR Only (Đen trắng) cho đẹp
                 logo: "https://img.vietqr.io/image/VCB-1041249904-qr_only.png",
                 appLink: "vcbdigibank://qr"
             },
@@ -142,8 +135,8 @@
                 name: "Ví ZaloPay",
                 acc: "0347856690", 
                 user: "PHAN DUC DUY",
-                // Link ảnh Zalo MỚI
-                logo: "https://i.ibb.co/W4tkqgXT/IMG-0473.jpg", 
+                // Ảnh số 1 bạn gửi
+                logo: "https://i.ibb.co/B2rH2Lnc/gen.jpg", 
                 appLink: "zalopay://"
             },
             "MOMO": {
@@ -151,8 +144,8 @@
                 name: "Ví MoMo",
                 acc: "0347856690",
                 user: "PHAN DUC DUY",
-                // Link ảnh MoMo MỚI
-                logo: "https://i.ibb.co/ZjWfQf7/IMG-0472.jpg",
+                // Ảnh số 2 bạn gửi
+                logo: "https://i.ibb.co/27kJfqjR/gen.jpg",
                 appLink: "momo://"
             }
         };
@@ -178,7 +171,7 @@
             // 3. Xử lý ảnh QR
             const amountInput = document.getElementById("amount");
             if (data.type === "WALLET") {
-                // Nếu là Zalo/MoMo -> Hiện ảnh tĩnh mới của bạn
+                // Nếu là Zalo/MoMo -> Hiện ảnh tĩnh mới
                 document.getElementById("qr_img").src = data.logo;
                 document.getElementById("noteText").innerText = "✨ Quét mã trên để thanh toán nha!";
             } else {
@@ -233,7 +226,6 @@
                 document.body.removeChild(a);
                 btn.innerText = "✅ Đã lưu!";
             } catch (e) {
-                // Dự phòng nếu trình duyệt chặn tải ảnh từ link ngoài
                 alert("Bạn vui lòng nhấn giữ vào ảnh QR và chọn 'Lưu vào ảnh' nhé!");
                 btn.innerText = "Lỗi tải ảnh";
             }
