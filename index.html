@@ -5,97 +5,192 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thanh Toán VCB - Phan Duc Duy</title>
     <style>
-        /* GIỮ NGUYÊN GIAO DIỆN CŨ ĐẸP MẮT */
-        body { font-family: -apple-system, sans-serif; background: #f0f2f5; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 10px; }
-        .card { background: white; padding: 20px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); text-align: center; width: 100%; max-width: 380px; }
-        h2 { color: #00C220; margin: 0 0 5px 0; }
-        .bank-info { background: #e8f5e9; padding: 10px; border-radius: 10px; margin: 15px 0; color: #2e7d32; font-size: 14px; text-align: left; }
-        input { width: 100%; padding: 15px; border: 2px solid #eee; border-radius: 12px; font-size: 24px; text-align: center; font-weight: bold; color: #00C220; outline: none; box-sizing: border-box; margin-bottom: 15px; background: #fafafa; }
-        input:focus { border-color: #00C220; background: white; }
-        #qr_img { width: 100%; border-radius: 12px; border: 1px solid #eee; margin-bottom: 15px; min-height: 250px; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #f2f4f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 15px;
+        }
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 24px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+        }
+        .header { margin-bottom: 20px; }
+        .header h2 { color: #00C220; margin: 0; font-size: 24px; }
+        .header p { color: #666; margin: 5px 0 0 0; font-size: 14px; }
+
+        .bank-info {
+            background: #f0fdf4;
+            border: 1px dashed #00C220;
+            padding: 15px;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            text-align: left;
+            color: #166534;
+        }
+        .bank-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 15px; }
+        .bank-row:last-child { margin-bottom: 0; }
+        .bank-label { color: #15803d; opacity: 0.8; }
+        .bank-value { font-weight: bold; }
+
+        .input-group { margin-bottom: 20px; }
+        input {
+            width: 100%;
+            padding: 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 16px;
+            font-size: 26px;
+            text-align: center;
+            font-weight: bold;
+            color: #00C220;
+            outline: none;
+            box-sizing: border-box;
+            background: #f9fafb;
+            transition: 0.2s;
+        }
+        input:focus { border-color: #00C220; background: white; box-shadow: 0 0 0 4px rgba(0,194,32,0.1); }
+        input::placeholder { color: #d1d5db; font-size: 20px; font-weight: normal; }
+
+        #qr_img {
+            width: 100%;
+            border-radius: 16px;
+            border: 1px solid #f3f4f6;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .btn-group { display: flex; flex-direction: column; gap: 12px; }
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 14px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .btn-save { background-color: #374151; color: white; }
+        .btn-open { background-color: #00C220; color: white; box-shadow: 0 4px 12px rgba(0,194,32,0.3); }
+        .btn:active { transform: scale(0.98); }
         
-        .btn { display: block; width: 100%; padding: 14px; border: none; border-radius: 10px; font-weight: bold; font-size: 16px; cursor: pointer; text-decoration: none; margin-bottom: 10px; box-sizing: border-box; }
-        .btn-save { background: #333; color: white; }
-        .btn-open { background: #00C220; color: white; }
-        .btn:active { opacity: 0.8; transform: scale(0.98); }
+        .note { font-size: 13px; color: #9ca3af; margin-top: 20px; line-height: 1.5; }
     </style>
 </head>
 <body>
 
     <div class="card">
-        <h2>Cổng Thanh Toán</h2>
+        <div class="header">
+            <h2>Chuyển Khoản Nhanh</h2>
+            <p>Vietcombank Digibank</p>
+        </div>
+        
         <div class="bank-info">
-            <div>🏦 <strong>VCB Digibank</strong></div>
-            <div>👤 <strong>PHAN DUC DUY</strong></div>
-            <div>💳 <strong>1041249904</strong></div>
+            <div class="bank-row">
+                <span class="bank-label">Chủ tài khoản:</span>
+                <span class="bank-value">PHAN DUC DUY</span>
+            </div>
+            <div class="bank-row">
+                <span class="bank-label">Số tài khoản:</span>
+                <span class="bank-value" style="font-size:18px; letter-spacing:1px;">1041249904</span>
+            </div>
         </div>
 
-        <input type="tel" id="amount" placeholder="Nhập tiền..." onkeyup="formatMoney(this)">
+        <div class="input-group">
+            <input type="tel" id="amount" placeholder="Nhập số tiền..." onkeyup="formatMoney(this)">
+        </div>
 
         <img id="qr_img" src="" alt="QR Code"/>
 
-        <button class="btn btn-save" onclick="downloadQR()">
-            ⬇ 1. Lưu Ảnh QR
-        </button>
+        <div class="btn-group">
+            <button class="btn btn-save" onclick="downloadQR()">
+                ⬇ Tải QR & Lưu vào máy
+            </button>
+            
+            <a href="vcbdigibank://qr" class="btn btn-open">
+                🚀 Mở App Quét Mã Ngay
+            </a>
+        </div>
 
-        <button class="btn btn-open" onclick="tryOpenApp()">
-            🚀 2. Mở App VCB Chuyển Khoản
-        </button>
+        <p class="note">
+            💡 <strong>Mẹo:</strong> Nhấn "Tải QR" trước, sau đó nhấn "Mở App" rồi chọn biểu tượng 🖼️ (ảnh) để tải QR lên.
+        </p>
     </div>
 
     <script>
+        // --- THÔNG TIN CỐ ĐỊNH ---
         const MY_BANK = "VCB";
         const MY_ACCOUNT = "1041249904";
         const MY_NAME = "PHAN DUC DUY";
-        
+
+        // Khởi tạo QR mặc định (0đ)
         updateQR(0);
 
         function formatMoney(input) {
+            // Xoá ký tự không phải số
             let value = input.value.replace(/\D/g, "");
-            input.value = value ? parseInt(value).toLocaleString('en-US') : "";
+            
+            // Format dấu phẩy
+            if (value) {
+                input.value = parseInt(value).toLocaleString('en-US');
+            } else {
+                input.value = "";
+            }
+            
+            // Cập nhật QR
             updateQR(value);
         }
 
         function updateQR(amount) {
-            let src = amount > 0 
-                ? `https://img.vietqr.io/image/${MY_BANK}-${MY_ACCOUNT}-compact2.png?amount=${amount}&addInfo=THANH TOAN&accountName=${MY_NAME}`
-                : `https://img.vietqr.io/image/${MY_BANK}-${MY_ACCOUNT}-compact2.png`;
-            document.getElementById("qr_img").src = src;
-        }
-
-        // --- TÍNH NĂNG MỞ APP CƯỠNG ÉP ---
-        function tryOpenApp() {
-            // 1. Thử mở bằng Link mới nhất
-            window.location.href = "vcbdigibank://";
-            
-            // 2. Thử mở bằng Link cũ (sau 0.5s nếu link trên xịt)
-            setTimeout(function() {
-                window.location.href = "vietcombankmobile://";
-            }, 500);
-
-            // 3. Nếu vẫn không được thì thông báo
-            setTimeout(function() {
-                if(confirm("Điện thoại đang chặn mở App tự động. Bạn có muốn mở App Store/CH Play để vào VCB không?")) {
-                     // Link đến Store (thường sẽ có nút 'Mở' nếu đã cài app)
-                    window.location.href = "https://www.vietcombank.com.vn/m/ios"; 
-                }
-            }, 1500);
+            let qrSrc;
+            if(amount > 0) {
+                // Có tiền -> Hiện QR đầy đủ
+                qrSrc = `https://img.vietqr.io/image/${MY_BANK}-${MY_ACCOUNT}-compact2.png?amount=${amount}&addInfo=THANH TOAN&accountName=${MY_NAME}`;
+            } else {
+                // Chưa nhập tiền -> Hiện QR tài khoản
+                qrSrc = `https://img.vietqr.io/image/${MY_BANK}-${MY_ACCOUNT}-compact2.png`;
+            }
+            document.getElementById("qr_img").src = qrSrc;
         }
 
         async function downloadQR() {
             const imgUrl = document.getElementById("qr_img").src;
+            const btn = document.querySelector('.btn-save');
+            const originalText = btn.innerText;
+            
+            btn.innerText = "⏳ Đang tải...";
+            
             try {
                 const response = await fetch(imgUrl);
                 const blob = await response.blob();
                 const url = URL.createObjectURL(blob);
+                
                 const a = document.createElement("a");
                 a.href = url;
-                a.download = `QR_VCB_${MY_ACCOUNT}.png`; 
+                a.download = `QR_VCB_${MY_ACCOUNT}.png`;
                 document.body.appendChild(a);
                 a.click();
                 document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                btn.innerText = "✅ Đã lưu ảnh!";
+                setTimeout(() => btn.innerText = originalText, 2000);
             } catch (error) {
-                alert("Hãy nhấn giữ vào ảnh để lưu nhé!");
+                alert("Lỗi tải ảnh! Hãy nhấn giữ vào ảnh QR để lưu thủ công.");
+                btn.innerText = originalText;
             }
         }
     </script>
